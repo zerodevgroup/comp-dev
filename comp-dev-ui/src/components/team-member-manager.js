@@ -175,7 +175,7 @@ const TeamMemberManager = () => {
                       <IconButton color="primary" aria-label="Edit" component="span" onClick={() => handleEdit(teamMember._id)}>
                         <EditIcon />
                       </IconButton>
-                      <IconButton color="primary" aria-label="Edit" component="span" onClick={() => handleDelete(teamMember._id)}>
+                      <IconButton color="primary" aria-label="Delete" component="span" onClick={() => handleDelete(teamMember._id)}>
                         <DeleteIcon />
                       </IconButton>
                     </TableCell>

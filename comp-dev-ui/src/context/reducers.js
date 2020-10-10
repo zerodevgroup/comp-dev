@@ -21,7 +21,6 @@ const initialState = {
     message: "Showing most recent teamMember entries",
     type: "recent",
   },
-  user: null,
 }
 
 const types = {

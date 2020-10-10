@@ -138,6 +138,7 @@ const TeamMemberUpdate = () => {
         <Grid item md={3}>
           <></>
         </Grid>
+
         {/* First Name, Last Name */}
         <Grid item md={6}>
           <TextField className={classes.field} id="firstName" value={state.teamMember.firstName} label="First Name" variant="outlined" fullWidth onChange={handleChange} />
@@ -157,8 +158,8 @@ const TeamMemberUpdate = () => {
         {/* Role, Email */}
         <Grid item md={6}>
           <FormControl variant="outlined" fullWidth>
-            <InputLabel id="roleLabel">Status</InputLabel>
-            <Select labelId="roleLabel" label="Status" id="role" name="role" value={state.teamMember.role} onChange={handleChange}>
+            <InputLabel id="roleLabel">Role</InputLabel>
+            <Select labelId="roleLabel" label="Role" id="role" name="role" value={state.teamMember.role} onChange={handleChange}>
               <MenuItem value=""><em>None</em></MenuItem>
               <MenuItem value={"Administrator"}>Administrator</MenuItem>
               <MenuItem value={"Customer Service Agent"}>Customer Service Agent</MenuItem>
