@@ -13,7 +13,8 @@ import NavBar from "./components/nav-bar"
 
 // Pages
 import About from "./pages/about"
-import TeamMembers from "./pages/team-members"
+import TeamMemberPage from "./pages/team-member-page"
+import TeamMemberUpdatePage from "./pages/team-member-update-page"
 
 export default function App() {
   return (
@@ -23,8 +24,11 @@ export default function App() {
       </div>
       <div>
         <Switch>
-          <Route path="/team-members">
-            <TeamMembers />
+          <Route path="/team-member-page">
+            <TeamMemberPage />
+          </Route>
+          <Route path="/team-member-update-page">
+            <TeamMemberUpdatePage />
           </Route>
           <Route path="/about">
             <About />

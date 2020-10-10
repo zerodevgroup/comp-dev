@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function TeamMembers() {
+export default function TeamMemberPage() {
   const classes = useStyles();
 
   return (

@@ -137,7 +137,7 @@ const TeamMemberManager = () => {
   }
 
   if(isEditing) {
-    return <Redirect to="/TeamMemberUpdate" />
+    return <Redirect to="/team-member-update-page" />
   }
 
   return (
