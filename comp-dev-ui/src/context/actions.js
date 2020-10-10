@@ -1,29 +1,35 @@
 import { types } from "./reducers"
 export const useActions = (state, dispatch) => {
-  function workflowUpdate(newWorkflow) {
-    // Simple dispatch to reducer (for now)
-    dispatch({ type: types.WORKFLOW_UPDATE, payload: newWorkflow })
+  function teamMemberUpdate(teamMemberData) {
+    dispatch({ type: types.TEAM_MEMBER_UPDATE, teamMemberData: teamMemberData })
   }
 
-  function setCampaignInitialState() {
+  function teamMemberSetInitialState() {
+    dispatch({ type: types.TEAM_MEMBER_SET_INITIAL_STATE })
+  }
 
-    dispatch({ type: types.CAMPAIGN_SET_INITIAL_STATE })
-  } 
+  function teamMemberCurrentUpdate(teamMemberCurrentData) {
+    dispatch({ type: types.TEAM_MEMBER_CURRENT_UPDATE, teamMemberCurrentData: teamMemberCurrentData })
+  }
 
-  function campaignUpdate(newCampaign) {
+  function teamMemberCurrentSetInitialState() {
+    dispatch({ type: types.TEAM_MEMBER_CURRENT_SET_INITIAL_STATE })
+  }
 
-    dispatch({ type: types.CAMPAIGN_UPDATE, payload: newCampaign})
-  } 
+  function teamMemberLookupUpdate(teamMemberLookupData) {
+    dispatch({ type: types.TEAM_MEMBER_LOOKUP_UPDATE, teamMemberLookupData: teamMemberLookupData })
+  }
 
-  function wikiUpdate(newWiki) {
-    dispatch({type: types.WIKI_UPDATE, payload: newWiki})
+  function teamMemberLookupSetInitialState() {
+    dispatch({ type: types.TEAM_MEMBER_LOOKUP_SET_INITIAL_STATE })
   }
 
   return {
-    workflowUpdate,
-    campaignUpdate,
-    setCampaignInitialState,
-    wikiUpdate,
+    teamMemberUpdate,
+    teamMemberSetInitialState,
+    teamMemberCurrentUpdate,
+    teamMemberCurrentSetInitialState,
+    teamMemberLookupUpdate,
+    teamMemberLookupSetInitialState,
   }
 }
-

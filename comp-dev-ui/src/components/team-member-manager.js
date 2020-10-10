@@ -33,6 +33,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
+const Alert = (props) => {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
+
 const TeamMemberManager = () => {
   const { state, dispatch, actions } = useContext(StoreContext)
   const [teamMembers, setTeamMembers] = useState([])
@@ -104,7 +108,7 @@ const TeamMemberManager = () => {
   }
 
   const getTeamMembers = async () => {
-    let data = await postData("https://goldenyears.zerodevgroup.com/goldenyears-api/list/teamMembers", {search: {value: state.teamMemberLookup.searchValue}, limit: 100, sort: {"timestamp": -1}})
+    let data = await postData("https://milspec.io/comp-dev-api/list/team-members", {search: {value: state.teamMemberLookup.searchValue}, limit: 100, sort: {"timestamp": -1}})
 
     if(data.docs && data.docs.length > 0) {
       let teamMembers = data.docs
@@ -116,8 +120,6 @@ const TeamMemberManager = () => {
   }
 
   const postData = async (url = "", data = {}) => {
-    let user = { ...state.user } 
-
     // Default options are marked with *
     const response = await fetch(url, {
       method: "POST", // *GET, POST, PUT, DELETE, etc.
@@ -125,9 +127,7 @@ const TeamMemberManager = () => {
       cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
       credentials: "same-origin", // include, *same-origin, omit
       headers: {
-        "Content-Type": "application/json",
-        "token": "cfe64cd0-b571-11ea-8ee0-9715aebc4714",
-        "sub": user.sub,
+        "Content-Type": "application/json"
       },
       redirect: "follow", // manual, *follow, error
       referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
@@ -161,14 +161,12 @@ const TeamMemberManager = () => {
               <TableHead>
                 <TableRow>
                   <TableCell>Actions</TableCell>
-                  <TableCell>Last Name</TableCell>
+                  <TableCell>Role</TableCell>
+                  <TableCell>Name</TableCell>
                   <TableCell>First Name</TableCell>
-                  <TableCell>Middle Initial</TableCell>
-                  <TableCell>Suffix</TableCell>
-                  <TableCell>Created Date</TableCell>
+                  <TableCell>Last Name</TableCell>
+                  <TableCell>Member Id</TableCell>
                   <TableCell>Email</TableCell>
-                  <TableCell>Date of Birth</TableCell>
-                  <TableCell>Cell Phone</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -182,14 +180,12 @@ const TeamMemberManager = () => {
                         <DeleteIcon />
                       </IconButton>
                     </TableCell>
+                    <TableCell>{teamMember.role}</TableCell>
+                    <TableCell>{teamMember.name}</TableCell>
                     <TableCell>{teamMember.lastName}</TableCell>
                     <TableCell>{teamMember.firstName}</TableCell>
-                    <TableCell>{teamMember.middleName}</TableCell>
-                    <TableCell>{teamMember.suffix}</TableCell>
-                    <TableCell>{teamMember.createdDate}</TableCell>
+                    <TableCell>{teamMember.memberId}</TableCell>
                     <TableCell>{teamMember.email}</TableCell>
-                    <TableCell>{teamMember.dateOfBirth}</TableCell>
-                    <TableCell>{teamMember.cellPhone}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
