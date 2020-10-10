@@ -18,13 +18,11 @@ export default function TeamMembers() {
   const classes = useStyles();
 
   return (
-    <Container component="main" maxWidth="xs">
       <div className={classes.paper}>
         <Typography component="h1" variant="h5">
           Team Members
           <TeamMemberManager />
         </Typography>
       </div>
-    </Container>
   );
 }

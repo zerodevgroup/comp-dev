@@ -162,9 +162,8 @@ const TeamMemberManager = () => {
                 <TableRow>
                   <TableCell>Actions</TableCell>
                   <TableCell>Role</TableCell>
-                  <TableCell>Name</TableCell>
-                  <TableCell>First Name</TableCell>
                   <TableCell>Last Name</TableCell>
+                  <TableCell>First Name</TableCell>
                   <TableCell>Member Id</TableCell>
                   <TableCell>Email</TableCell>
                 </TableRow>
@@ -181,7 +180,6 @@ const TeamMemberManager = () => {
                       </IconButton>
                     </TableCell>
                     <TableCell>{teamMember.role}</TableCell>
-                    <TableCell>{teamMember.name}</TableCell>
                     <TableCell>{teamMember.lastName}</TableCell>
                     <TableCell>{teamMember.firstName}</TableCell>
                     <TableCell>{teamMember.memberId}</TableCell>
