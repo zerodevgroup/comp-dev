@@ -13,6 +13,7 @@ import NavBar from "./components/nav-bar"
 
 // Pages
 import About from "./pages/about"
+import TeamMembers from "./pages/team-members"
 
 export default function App() {
   return (
@@ -22,6 +23,9 @@ export default function App() {
       </div>
       <div>
         <Switch>
+          <Route path="/team-members">
+            <TeamMembers />
+          </Route>
           <Route path="/about">
             <About />
           </Route>
