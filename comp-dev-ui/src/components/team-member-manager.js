@@ -108,7 +108,7 @@ const TeamMemberManager = () => {
   }
 
   const getTeamMembers = async () => {
-    let data = await postData("https://milspec.io/comp-dev-api/list/team-members", {search: {value: state.teamMemberLookup.searchValue}, limit: 100, sort: {"timestamp": -1}})
+    let data = await postData("https://milspec.io/comp-dev-api/list/teammembers", {search: {value: state.teamMemberLookup.searchValue}, limit: 100, sort: {"timestamp": -1}})
 
     if(data.docs && data.docs.length > 0) {
       let teamMembers = data.docs
