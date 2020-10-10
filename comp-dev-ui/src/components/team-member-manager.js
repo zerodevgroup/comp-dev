@@ -40,6 +40,7 @@ const Alert = (props) => {
 const TeamMemberManager = () => {
   const { state, dispatch, actions } = useContext(StoreContext)
   const [teamMembers, setTeamMembers] = useState([])
+  const [teamMembersLoaded, setTeamMembersLoaded] = useState(false)
   const [isEditing, setIsEditing] = useState(false)
   const classes = useStyles()
 
@@ -47,8 +48,11 @@ const TeamMemberManager = () => {
     // Load any data here
     console.log("Loading data...")
 
-    if(teamMembers.length === 0) {
-      getTeamMembers()
+    if(!teamMembersLoaded) {
+      (async () => {
+        await setTeamMembersLoaded(true)
+        await getTeamMembers()
+      })()
     }
   })
 
