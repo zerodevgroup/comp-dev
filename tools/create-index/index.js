@@ -8,7 +8,7 @@ let fields = process.argv[3]
 const url = "mongodb://localhost:27017"
 
 // Database Name
-const dbName = "cm"
+const dbName = "compdev"
 
 // Create a new MongoClient
 const client = new MongoClient(url, { useUnifiedTopology: true })
