@@ -7,10 +7,7 @@ import TeamMemberManager from "../components/team-member-manager"
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    marginTop: theme.spacing(8)
   }
 }));
 
@@ -18,11 +15,8 @@ export default function TeamMemberPage() {
   const classes = useStyles();
 
   return (
-      <div className={classes.paper}>
-        <Typography component="h1" variant="h5">
-          Team Members
-          <TeamMemberManager />
-        </Typography>
-      </div>
+    <Container className={classes.paper} fixed>
+      <TeamMemberManager />
+    </Container>
   );
 }

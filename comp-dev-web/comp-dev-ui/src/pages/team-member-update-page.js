@@ -7,19 +7,16 @@ import TeamMemberUpdate from "../components/team-member-update"
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    marginTop: theme.spacing(8)
   }
 }));
 
-export default function TeamMemberUpdatePage() {
+export default function TeamMemberPage() {
   const classes = useStyles();
 
   return (
-      <div className={classes.paper}>
-        <TeamMemberUpdate />
-      </div>
+    <Container className={classes.paper} fixed>
+      <TeamMemberUpdate />
+    </Container>
   );
 }
