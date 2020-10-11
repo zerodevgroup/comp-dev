@@ -53,7 +53,7 @@ const TeamMemberUpdate = () => {
   })
 
   const getTeamMember = async () => {
-    let data = await postData("https://milspec.io/comp-dev-api/find/teammembers", {find: {"_id": state.teamMemberCurrent._id}, limit: 0})
+    let data = await postData("/comp-dev-api/find/teammembers", {find: {"_id": state.teamMemberCurrent._id}, limit: 0})
 
     if(data.docs && data.docs.length > 0) {
       let teamMemberData = data.docs[0]
@@ -66,7 +66,7 @@ const TeamMemberUpdate = () => {
   }
 
   const handleSubmit = async () => {
-    let result = await postData("https://milspec.io/comp-dev-api/update/teammembers", state.teamMember)
+    let result = await postData("/comp-dev-api/update/teammembers", state.teamMember)
     console.log(result)
     setSubmitFormSnackbarIsOpen(true)
   }
