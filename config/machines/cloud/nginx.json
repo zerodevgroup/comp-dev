@@ -1,0 +1,24 @@
+{
+  "name": "comp-dev-vm-nginx",
+  "description": "comp-dev vm nginx config",
+  "repo": "https://github.com/zerodevgroup/comp-dev",
+  "license": "MIT",
+  "author": "zerodevgroup",
+  "framework": {
+    "name": "micro-fab"
+  },
+  "config": {
+    "type": "cloud",
+    "domain": "milspec.io",
+    "locations": [
+      {
+        "name": "comp-dev-api",
+        "mountPoint": "comp-dev-api"
+      },
+      {
+        "name": "comp-dev-web",
+        "mountPoint": "comp-dev-web"
+      }
+    ]
+  }
+}

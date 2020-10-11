@@ -1,0 +1,13 @@
+{
+  "name": "comp-dev-hosts",
+  "description": "comp-dev-hosts",
+  "repo": "https://github.com/zerodevgroup/comp-dev",
+  "license": "MIT",
+  "author": "zerodevgroup",
+  "framework": {
+    "name": "snow-dried"
+  },
+  "config": {
+    "name": "milspec"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "mongoUrl": "mongodb://localhost:27017/",
+  "mongoDatabase": "compdev",
+  "port": "4000",
+  "domain": "localhost",
+  "basePath": "/"
+}
