@@ -3,10 +3,6 @@
 ## VM Setup
 [Cloud Setup](https://github.com/zerodevgroup/comp-devgc/blob/master/docs/COMP-DEV-CLOUD-SETUP.md)
 
-or
-
-[Local VM Setup](https://github.com/zerodevgroup/comp-devgc/blob/master/docs/COMP-DEV-VM-SETUP.md)
-
 ## Mongo Setup
 [comp-dev-mongo](https://github.com/zerodevgroup/comp-devgc/blob/master/docs/COMP-DEV-MONGO.md)
 
