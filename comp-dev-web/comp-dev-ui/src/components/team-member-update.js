@@ -10,6 +10,7 @@ import IconButton from "@material-ui/core/IconButton"
 import InputLabel from "@material-ui/core/InputLabel"
 import { makeStyles } from "@material-ui/core/styles"
 import MenuItem from "@material-ui/core/MenuItem"
+import { Redirect } from "react-router-dom"
 import Radio from "@material-ui/core/Radio"
 import RadioGroup from "@material-ui/core/RadioGroup"
 import Select from "@material-ui/core/Select"
@@ -27,6 +28,9 @@ const useStyles = makeStyles((theme) => ({
   field: {
     marginBottom: "30px",
   },
+  alignRight: {
+    textAlign: "right",
+  },
   formControl: {
     margin: theme.spacing(1),
     minWidth: 120,
@@ -37,6 +41,7 @@ const TeamMemberUpdate = () => {
   console.log("TeamMemberUpdate")
   const { state, dispatch, actions } = useContext(StoreContext)
   const [teamMemberLoaded, setTeamMemberLoaded] = useState(false)
+  const [redirect, setRedirect] = useState("")
   const [saveFormSnackbarIsOpen, setSubmitFormSnackbarIsOpen] = React.useState(false)
 
   useEffect(() => {
@@ -69,6 +74,11 @@ const TeamMemberUpdate = () => {
     let result = await postData("/comp-dev-api/update/teammembers", state.teamMember)
     console.log(result)
     setSubmitFormSnackbarIsOpen(true)
+  }
+
+  const handleDone = () => {
+    console.log("done")
+    setRedirect("/team-member-page")
   }
 
   const handleSubmitFormSnackbarClose = (event, reason) => {
@@ -104,6 +114,10 @@ const TeamMemberUpdate = () => {
 
   const classes = useStyles()
 
+  if (redirect) {
+    return <Redirect to={redirect} />
+  }
+
   return (
     <div className={classes.root}>
       <Grid container spacing={2}>
@@ -135,8 +149,10 @@ const TeamMemberUpdate = () => {
         <Grid item md={3}>
           <></>
         </Grid>
-        <Grid item md={3}>
-          <></>
+        <Grid item md={3} className={classes.alignRight}>
+          <Button variant="contained" color="primary" onClick={handleDone}>
+            Done
+          </Button>
         </Grid>
 
         {/* First Name, Last Name */}
