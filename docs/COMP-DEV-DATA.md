@@ -5,9 +5,9 @@
 export TIMESTAMP=`timestamp.sh`
 ```
 
-## Import to Mongo (cold-might)
+## Import to Mongo (comp-dev)
 ```
-cd ~/cold-might/tools
+cd ~/comp-dev/tools
 ./drop-database.sh compdev
 ./import.sh ~/wip/output-$TIMESTAMP
 ```
