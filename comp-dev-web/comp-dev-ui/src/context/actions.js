@@ -10,15 +10,6 @@ export const useActions = (state, dispatch) => {
     dispatch({ type: types.TEAM_MEMBER_UPDATE, teamMemberData: teamMemberData })
   }
 
-  async function teamMemberRoleUpdate(teamMemberData) {
-    let teamMemberListData = await getTeamMembers("System")
-    teamMemberListData.forEach((teamMember) => {
-      if(teamMember.memberId == teamMemberData.memberId) {
-        teamMember.role = teamMemberData.role
-      }
-    })
-  }
-
   function teamMemberSetInitialState() {
     dispatch({ type: types.TEAM_MEMBER_SET_INITIAL_STATE })
   }
@@ -34,7 +25,7 @@ export const useActions = (state, dispatch) => {
   async function teamMemberDelete() {
     deleteTeamMember()
 
-    let teamMemberListData = await getTeamMembers("System")
+    let teamMemberListData = await getTeamMembers()
 
     dispatch({ type: types.TEAM_MEMBER_LIST_UPDATE, teamMemberListData: teamMemberListData })
   }
@@ -42,7 +33,7 @@ export const useActions = (state, dispatch) => {
   async function teamMemberListRetrieve() {
     let teamMemberListData = await getTeamMembers()
 
-    dispatch({ type: types.TEAM_MEMER_LIST_UPDATE, teamMemberListData: teamMemberListData })
+    dispatch({ type: types.TEAM_MEMBER_LIST_UPDATE, teamMemberListData: teamMemberListData })
   }
 
   function teamMemberLookupUpdate(teamMemberLookupData) {
@@ -61,7 +52,8 @@ export const useActions = (state, dispatch) => {
     dispatch({ type: types.SYSTEM_UPDATE, systemData: systemData })
   }
  
-  function systemUpdate(systemData) {
+  async function systemUpdate(systemData) {
+    await saveSystem(systemData)
     dispatch({ type: types.SYSTEM_UPDATE, systemData: systemData })
   }
 
@@ -117,8 +109,8 @@ export const useActions = (state, dispatch) => {
     let data = await postData("/comp-dev-api/delete/teammembers", state.teamMember)
   }
 
-  const getTeamMembers = async (type) => {
-    let searchValue = state.teamMember.searchValue
+  const getTeamMembers = async () => {
+    let searchValue = state.teamMemberLookup.searchValue
 
     let data = await postData("/comp-dev-api/list/teammembers", {search: {value: searchValue}, limit: 100, sort: {"timestamp": -1}})
 
@@ -139,6 +131,10 @@ export const useActions = (state, dispatch) => {
     }
 
     return system
+  }
+
+  const saveSystem = async () => {
+    let data = await postData("/comp-dev-api/update/systems", state.system)
   }
 
   return {

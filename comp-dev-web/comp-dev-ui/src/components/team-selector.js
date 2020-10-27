@@ -114,12 +114,12 @@ const SearchDialog = (props) => {
         fullWidth={true}
         open={open}
         onClose={handleClose}
-        aria-labeledby="search-dialog-title"
+        aria-labelledby="search-dialog-title"
         aria-describedby="search-dialog-description"
       >
         <DialogTitle id="search-dialog-title">{"Search Team Members"}</DialogTitle>
         <DialogContent>
-          <TextField />
+          <TextField id="searchValue" value={state.teamMemberLookup.searchValue} label="Search Value" variant="outlined" fullWidth onChange={handleChange} onKeyPress={handleEnter}/>
           <List component="nav" className={classes.root} aria-label="search">
             {state.teamMemberList.map((teamMember, index) => (
               <ListItem button onClick={(event) => { handleListItemClick(event, teamMember)}}>
@@ -171,43 +171,51 @@ const TeamSelector = (props) => {
     if(!systemLoaded) {
       fetchData()
     }
-  }, []); // Or [] if effect doesn't need props or state
+  }, [])
 
 
-  const handleChange = (event, teamMember) => {
-    let name = event.target.name ? event.target.name : event.target.id
-    let value = event.target.value
+  const handleChange = (event, selectedTeamMember) => {
+    let role = event.target.value
 
-    teamMember.role = event.target.value
 
-    actions.teamMemberRoleUpdate(teamMember)
+    let systemData = { ...state.system }
+
+    systemData.teamMembers.forEach((teamMember) => {
+      if(teamMember.memberId == selectedTeamMember.memberId) {
+        teamMember.role = role
+      }
+    })
+
+    actions.systemUpdate(systemData)
   }
 
-  const handleSearch = (_id) => {
+  const handleSearchOpen = (_id) => {
     console.log(_id)
     setOpen(true)
   }
 
-  const handleClose = () => {
+  const handleSearchClose = () => {
     setOpen(false)
   }
 
+  /*
   const handleEnter = (event) => {
     if (event.key === "Enter") {
       handleSearch()
     }
   }
+  */
 
   return (
     <React.Fragment>
-      <SearchDialog open={open} onClose={handleClose} />
+      <SearchDialog open={open} onClose={handleSearchClose} />
       <List component="nav" className={classes.root} aria-label="team-members">
         {state.system.teamMembers.map((teamMember, index) => (
           <ListItem key={teamMember.memberId}>
             <Paper className={classes.paper}>
               <Grid container>
                 <Grid item xs={2}>
-                  <Button component="span"><SearchIcon /></Button>
+                  <Button component="span" onClick={handleSearchOpen}><SearchIcon /></Button>
                 </Grid>
                 <Grid item xs={2}>
                   <div className={classes.title}>
@@ -223,7 +231,7 @@ const TeamSelector = (props) => {
                       <MenuItem value="Application Architect">Application Architect</MenuItem>
                       <MenuItem value="Manager/SME">Manager/SME</MenuItem>
                       <MenuItem value="Domain Lead">Domain Lead</MenuItem>
-                      <MenuItem value="Enterprise Architect"Enterprise Architect></MenuItem>
+                      <MenuItem value="Enterprise Architect">Enterprise Architect</MenuItem>
                       <MenuItem value="Developer">Developer</MenuItem>
                       <MenuItem value="SME">SME</MenuItem>
                       <MenuItem value="Manager">Manager</MenuItem>
@@ -239,52 +247,12 @@ const TeamSelector = (props) => {
                   </div>
                 </Grid>
                 <Grid item xs={2}>
-                  <Button component="span"><DeleteIcon /></Button>
+                  <Button component="span" onClick={handleSearchClose}><DeleteIcon /></Button>
                 </Grid>
               </Grid>
             </Paper>
           </ListItem>
         ))}
-        {/*state.system.teamMembers.map((teamMember, index) => (
-          <ListItem key={`list-item-${index}`} button>
-            <Paper className={classes.paper}>
-              <Grid container>
-                <Grid item xs={2}>
-                  <Typography className={classes.title}>
-                    {teamMember.memberId ? teamMember.memberId.toUpperCase() : ""}
-                  </Typography>
-                  <FormControl className={classes.formControl}>
-                    <Select
-                      labelId={`role-label-${index}`}
-                      id={`role-${index}`}
-                      value={teamMember.role}
-                      onChange={(event) => { handleChange(event, teamMember)}}
-                    >
-                      <MenuItem value="Application Architect">Application Architect></MenuItem>
-                      <MenuItem value="Manager/SME">Manager/SME></MenuItem>
-                      <MenuItem value="Domain Lead">Domain Lead></MenuItem>
-                      <MenuItem value="Enterprise Architect">Enterprise Architect></MenuItem>
-                      <MenuItem value="Developer">Developer></MenuItem>
-                      <MenuItem value="SME">SME></MenuItem>
-                      <MenuItem value="Manager">Manager></MenuItem>
-                    </Select>
-                  </FormControl>
-                </Grid>
-                <Grid item xs={5}>
-                  <Typography>
-                    {teamMember.firstName} {teamMember.lastName}
-                  </Typography>
-                  <Typography>
-                    {teamMember.email}
-                  </Typography>
-                </Grid>
-                <Grid item xs={2}>
-                  <Button component="span"><DeleteIcon /></Button>
-                </Grid>
-              </Grid>
-            </Paper>
-          </ListItem>
-        ))*/}
       </List>
       <Button component="span"><AddCircleIcon /></Button>
     </React.Fragment>
