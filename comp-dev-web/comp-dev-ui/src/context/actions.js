@@ -133,8 +133,8 @@ export const useActions = (state, dispatch) => {
     return system
   }
 
-  const saveSystem = async () => {
-    let data = await postData("/comp-dev-api/update/systems", state.system)
+  const saveSystem = async (systemData) => {
+    let data = await postData("/comp-dev-api/update/systems", systemData)
   }
 
   return {

@@ -48,7 +48,7 @@ const useStyles = makeStyles(() => ({
 
 const SearchDialog = (props) => {
   const { state, dispatch, actions } = useContext(StoreContext)
-  const { onClose, open } = props
+  const { onClose, open, handleListItemClick } = props
   const [teamMemberListLoaded, setteamMemberListLoaded] = useState(false)
 
   const classes = useStyles()
@@ -69,10 +69,12 @@ const SearchDialog = (props) => {
     onClose()
   }
 
+  /*
   const handleListItemClick = async(event, teamMember) => {
     console.log(teamMember)
     onClose()
   }
+  */
 
   const handleChange = (event) => {
     let name = event.target.name ? event.target.name : event.target.id
@@ -177,7 +179,6 @@ const TeamSelector = (props) => {
   const handleChange = (event, selectedTeamMember) => {
     let role = event.target.value
 
-
     let systemData = { ...state.system }
 
     systemData.teamMembers.forEach((teamMember) => {
@@ -185,6 +186,21 @@ const TeamSelector = (props) => {
         teamMember.role = role
       }
     })
+
+    actions.systemUpdate(systemData)
+  }
+
+  const handleDelete = (event, selectedTeamMember) => {
+    let systemData = { ...state.system }
+
+    let updatedTeamMembers = []
+    systemData.teamMembers.forEach((teamMember) => {
+      if(!(teamMember.memberId == selectedTeamMember.memberId)) {
+        updatedTeamMembers.push(teamMember)
+      }
+    })
+
+    systemData.teamMembers = updatedTeamMembers
 
     actions.systemUpdate(systemData)
   }
@@ -198,6 +214,17 @@ const TeamSelector = (props) => {
     setOpen(false)
   }
 
+  const handleListItemClick = async(event, selectedTeamMember) => {
+    console.log(selectedTeamMember)
+    let systemData = { ...state.system }
+
+    systemData.teamMembers.push(selectedTeamMember)
+
+    actions.systemUpdate(systemData)
+
+    setOpen(false)
+  }
+
   /*
   const handleEnter = (event) => {
     if (event.key === "Enter") {
@@ -206,18 +233,15 @@ const TeamSelector = (props) => {
   }
   */
 
-  return (
+  return(
     <React.Fragment>
-      <SearchDialog open={open} onClose={handleSearchClose} />
+      <SearchDialog open={open} onClose={handleSearchClose} handleListItemClick={handleListItemClick} />
       <List component="nav" className={classes.root} aria-label="team-members">
         {state.system.teamMembers.map((teamMember, index) => (
           <ListItem key={teamMember.memberId}>
             <Paper className={classes.paper}>
               <Grid container>
-                <Grid item xs={2}>
-                  <Button component="span" onClick={handleSearchOpen}><SearchIcon /></Button>
-                </Grid>
-                <Grid item xs={2}>
+                <Grid item xs={5}>
                   <div className={classes.title}>
                     {teamMember.memberId ? teamMember.memberId.toUpperCase() : ""}
                   </div>
@@ -247,14 +271,14 @@ const TeamSelector = (props) => {
                   </div>
                 </Grid>
                 <Grid item xs={2}>
-                  <Button component="span" onClick={handleSearchClose}><DeleteIcon /></Button>
+                  <Button component="span" onClick={(event) => { handleDelete(event, teamMember)}}><DeleteIcon /></Button>
                 </Grid>
               </Grid>
             </Paper>
           </ListItem>
         ))}
       </List>
-      <Button component="span"><AddCircleIcon /></Button>
+      <Button component="span" onClick={handleSearchOpen}><AddCircleIcon /></Button>
     </React.Fragment>
   )
 }
