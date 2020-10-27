@@ -126,17 +126,17 @@ const SearchDialog = (props) => {
                 <Paper className={classes.paper}>
                   <Grid container>
                     <Grid item xs={2}>
-                      <Typography className={classes.title}>
+                      <div className={classes.title}>
                         {teamMember.memberId ? teamMember.memberId.toUpperCase() : ""}
-                      </Typography>
+                      </div>
                     </Grid>
                     <Grid item xs={5}>
-                      <Typography>
+                      <div>
                         {teamMember.firstName} {teamMember.lastName}
-                      </Typography>
-                      <Typography>
+                      </div>
+                      <div>
                         {teamMember.email}
-                      </Typography>
+                      </div>
                     </Grid>
                     <Grid item xs={2}>
                     </Grid>
