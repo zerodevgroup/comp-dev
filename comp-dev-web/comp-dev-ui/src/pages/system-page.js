@@ -3,7 +3,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
-import TeamMemberUpdate from "../components/team-member-update"
+import TeamSelector from "../components/team-selector"
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -11,12 +11,15 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function TeamMemberPage() {
+export default function SystemPage() {
   const classes = useStyles();
 
   return (
     <Container className={classes.paper} fixed>
-      <TeamMemberUpdate />
+      <Typography variant="h6">
+        {"System"}
+      </Typography>
+      <TeamSelector />
     </Container>
   );
 }
