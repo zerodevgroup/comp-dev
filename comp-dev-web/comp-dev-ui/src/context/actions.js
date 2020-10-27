@@ -98,15 +98,15 @@ export const useActions = (state, dispatch) => {
   }
 
   const createTeamMember = async () => {
-    let data = await postData("/comp-dev-api/create/teammembers", [state.teamMember])
+    await postData("/comp-dev-api/create/teammembers", [state.teamMember])
   }
 
   const saveTeamMember = async () => {
-    let data = await postData("/comp-dev-api/update/teammembers", state.teamMember)
+    await postData("/comp-dev-api/update/teammembers", state.teamMember)
   }
 
   const deleteTeamMember = async () => {
-    let data = await postData("/comp-dev-api/delete/teammembers", state.teamMember)
+    await postData("/comp-dev-api/delete/teammembers", state.teamMember)
   }
 
   const getTeamMembers = async () => {
@@ -134,7 +134,7 @@ export const useActions = (state, dispatch) => {
   }
 
   const saveSystem = async (systemData) => {
-    let data = await postData("/comp-dev-api/update/systems", systemData)
+    await postData("/comp-dev-api/update/systems", systemData)
   }
 
   return {
