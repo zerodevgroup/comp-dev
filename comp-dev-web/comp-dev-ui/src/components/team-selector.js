@@ -107,14 +107,6 @@ const TeamSelector = (props) => {
     setOpen(false)
   }
 
-  /*
-  const handleEnter = (event) => {
-    if (event.key === "Enter") {
-      handleSearch()
-    }
-  }
-  */
-
   return(
     <React.Fragment>
       <TeamSearchDialog open={open} onClose={handleSearchClose} handleListItemClick={handleListItemClick} />
